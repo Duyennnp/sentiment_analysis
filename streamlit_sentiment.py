@@ -158,21 +158,30 @@ st.write("## Sentiment Analysis")
 
 menu = ["Business Objective", "Build Project", "New Prediction", "Product Analysis"]
 choice = st.sidebar.selectbox('Menu', menu)
-st.sidebar.write("""#### Thành viên thực hiện:
-                 1. Nguyễn Ngọc Phương Duyên
-                 2. Mai Anh Sơn""")
-st.sidebar.write("""#### Giảng viên hướng dẫn: 
-                 - Khuất Thùy Phương""")
+st.sidebar.markdown("""
+                    #### Thành viên thực hiện:
+                    - Nguyễn Ngọc Phương Duyên
+                    - Mai Anh Sơn
+                    """)
+st.sidebar.markdown("""
+                    #### Giảng viên hướng dẫn:
+                    - Khuất Thùy Phương
+                    """)
 st.sidebar.write("""#### Mã lớp: DL07_299T27_ON""")
 st.sidebar.write("""#### Thời gian thực hiện: 12/2024""")
 if choice == 'Business Objective':    
     st.subheader("Business Objective")
-    st.write("""##### 1. Xây dựng mô hình dự đoán phản hồi của khách hàng về sản phẩm""")
+    st.markdown("""
+                #### Tổng quan về HASAKI:
+             - HASAKI.VN là hệ thống cửa hàng mỹ phẩm chính hãng và dịch vụ chăm sóc sắc đẹp chuyên sâu với hệ thống cửa hàng trải dài trên
+             toàn quốc; và hiện đang là đối tác phân phối chiến lược tại thị trường Việt Nam của hàng loạt thương hiệu lớn
+             - Khách hàng có thể lên đây để lựa chọn sản phẩm, xem các đánh giá/ nhận xét cũng như đặt mua sản phẩm.""")
+    st.write("""#### 1. Xây dựng mô hình dự đoán phản hồi của khách hàng về sản phẩm""")
     st.write("""Xây dựng mô hình dự đoán giúp Hasaki.vn và các công ty đối tác có thể biết được 
              những phản hồi nhanh chóng của khách hàng về sản phẩm hay dịch vụ (tích cực, tiêu cực hay trung tính), 
              điều này giúp họ cải thiện sản phẩm/ dịch vụ → làm hài lòng khách hàng.""")  
     st.image("sentiment.jpg")
-    st.write("""##### 2. Thực hiện phân tích sản phẩm""")
+    st.write("""#### 2. Thực hiện phân tích sản phẩm""")
     st.write("""Khi chọn một sản phẩm cụ thể sẽ có những phân tích liên quan về sản phẩm như:
               mã sản phẩm, tên sản phẩm, số nhận xét tích cực và tiêu cực kèm wordcloud của từng loại, các keyword chính liên quan,... 
              để đối tác bán hàng nắm được tình hình sản phẩm và từ đó có những thay đổi tích cực.""")
@@ -180,24 +189,37 @@ if choice == 'Business Objective':
 
 elif choice == 'Build Project':
     st.subheader("Build Project")
-    st.write("##### 1. Some data")
+    st.write("#### 1. Some data")
     st.dataframe(df.head(3))
-    st.dataframe(df.tail(3))  
-    st.write("##### 2. Visualize Sentiment")
-    st.image("SoLuong_BinhLuan.jpg") 
+    st.dataframe(df.tail(3))
 
-    st.write("##### 3. Build model Random Forest")
+    st.write("#### 2. Visualize Sentiment")
+    st.image("SoLuong_BinhLuan.jpg") 
+    st.write("""- Sơ đồ cho thấy dữ liệu bị mất cân bằng với lớp tích cực đang chiếm đa số, 
+                do Hasaki là một hệ thống lớn và các đối tác cung cấp sản phẩm cho Hasaki đa số đều là các nhãn hàng đáng tin cậy, 
+             nên sản phẩm và dịch vụ luôn được đánh giá cao.""")
+    st.write("""##### Các phương pháp khắc phục:""")
+    st.image("Imbalance.jpg")
+    st.write("""- Sau khi xem xét không thực hiện các biện pháp trên mà vẫn thực hiện train mô hình trên tập dữ liệu hiện tại, 
+             nếu kết quả đánh giá mô hình không khả quan sẽ thực hiện phương án cải thiện.""")
+
+    st.write("#### 3. Build model Random Forest")
     st.write("Training time: 17.519s")
     
-
-    st.write("##### 4. Evaluation")
-    st.write("###### Confusion matrix:")
+    st.write("#### 4. Evaluation")
+    st.markdown("""
+                **Các chỉ số mô hình:**
+                - Accuracy: 0.980
+                - Precision: 0.980
+                - Recall: 0.980
+                - F1 score: 0.980""")
+    st.write("##### Classification report:")
+    st.image("classification_report_v0.jpg")
+    st.write("##### Confusion matrix:")
     st.image("confusion_matrix_rfr.jpg")
     st.image("confusion_matrix_rfr_graph.jpg")
-    st.write("###### Classification report:")
-    st.image("classification_report.jpg")
     
-    st.write("##### 5. Summary: Mô hình Random Forest với accuracy cao 0.98 cho thấy mô hình nhận diện khá tốt cho các lớp.")
+    st.write("#### 5. Summary: Mô hình Random Forest với accuracy cao 0.98 cho thấy mô hình nhận diện khá tốt cho các lớp.")
 
 elif choice == 'New Prediction':
     st.image('hasaki_banner_1.jpg', use_column_width=True)
