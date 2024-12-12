@@ -6,8 +6,6 @@ seaborn
 scikit-learn
 underthesea
 regex
-string
-time
 joblib
 wordcloud
 ast
