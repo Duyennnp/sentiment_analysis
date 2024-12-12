@@ -8,5 +8,4 @@ underthesea
 regex
 joblib
 wordcloud
-ast
 plotly
